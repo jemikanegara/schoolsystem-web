@@ -1,28 +1,84 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Navigation/>
+    <div class="content" :style="[!hideMenu ? {'margin-top': '99px'} : null]">
+      <div class="top-navigation">
+        <router-link to="/" exact>
+          <font-awesome icon="home" size="lg" :style="{color: '#003243'}"/>
+        </router-link>
+      </div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navigation from "./components/Navigation";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    Navigation
+  },
+  computed: {
+    ...mapGetters(["hideMenu"])
+  },
+  methods: {
+    ...mapActions(["updateIsMobile"])
+  },
+  mounted() {
+    window.onresize = () => {
+      const isMobile = window.innerWidth < 981 ? true : false;
+      this.updateIsMobile(isMobile);
+    };
   }
-}
+};
 </script>
 
 <style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: "Montserrat";
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background: #fff;
+  display: flex;
+  padding: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.content {
+  width: 100%;
+  padding: 10px;
+  transition: all 1s ease;
+}
+
+.top-navigation {
+  padding: 15px 0 20px;
+}
+
+@media (max-width: 980px) {
+  #app {
+    display: block;
+  }
 }
 </style>
