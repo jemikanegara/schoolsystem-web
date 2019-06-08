@@ -22,7 +22,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import capitalize from "../../../../filters/capitalize";
 import FilterStaff from "./FilterStaff";
 import ViewStaffDesktop from "./ViewStaffDesktop";
 import ViewStaffMobile from "./ViewStaffMobile";

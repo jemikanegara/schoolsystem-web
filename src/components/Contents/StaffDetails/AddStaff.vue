@@ -64,7 +64,6 @@
 
 <script>
 import { mapActions } from "vuex";
-import capitalize from "../../../filters/capitalize";
 import { setTimeout } from "timers";
 
 export default {
